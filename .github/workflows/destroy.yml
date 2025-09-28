@@ -1,7 +1,7 @@
 name: Destroy AWS Infrastructure
 
 on:
-  workflow_dispatch: # permite rodar manualmente no GitHub
+  workflow_dispatch:
 
 jobs:
   terraform-destroy:
