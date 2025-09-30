@@ -29,20 +29,11 @@ module "nat_gateway" {
   tags             = var.tags
 }
 
-module "route_table_public" {
+module "route_table" {
   source     = "./modules/route_table"
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.subnet.public_subnet_ids
   gateway_id = module.internet_gateway.igw_id
-  route_cidr = "0.0.0.0/0"
-  tags       = var.tags
-}
-
-module "route_table_private" {
-  source     = "./modules/route_table"
-  vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.subnet.private_subnet_ids
-  gateway_id = module.nat_gateway.nat_gateway_id
   route_cidr = "0.0.0.0/0"
   tags       = var.tags
 }
