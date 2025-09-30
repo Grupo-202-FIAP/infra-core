@@ -19,7 +19,7 @@ output "internet_gateway_id" {
 }
 
 output "route_table_id" {
-  description = "ID da Route Table pública"
+  description = "ID da Route Table"
   value       = module.route_table.route_table_id
 }
 
