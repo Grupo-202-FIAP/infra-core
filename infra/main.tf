@@ -62,3 +62,11 @@ module "acl" {
   subnet_id = module.subnet.public_subnet_ids[0]
   tags      = var.tags
 }
+
+module "api_gateway" {
+  source      = "./modules/api_gateway"
+  name        = "crud-api"
+  description = "CRUD API Gateway"
+  root_path   = "items"
+  stage_name  = "dev"
+}
