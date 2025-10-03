@@ -6,7 +6,12 @@ resource "aws_route_table" "public" {
     gateway_id = var.gateway_id
   }
 
-  tags = var.tags
+  tags = merge(
+    {
+      Name = var.route_table_name
+    },
+    var.tags
+  )
 }
 
 resource "aws_route_table_association" "public" {

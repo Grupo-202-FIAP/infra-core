@@ -1,6 +1,7 @@
 variable "sg_api_name" {
   type        = string
   description = "Nome do SG da API"
+  default = ""
 }
 
 variable "vpc_id" {

@@ -5,12 +5,12 @@ output "vpc_id" {
 
 output "public_subnet_ids" {
   description = "Lista de IDs das subnets públicas"
-  value       = module.subnet.public_subnet_ids
+  value       = module.public_subnet.public_subnet_ids
 }
 
 output "private_subnet_ids" {
   description = "Lista de IDs das subnets privadas"
-  value       = module.subnet.private_subnet_ids
+  value       = module.private_subnet.private_subnet_ids
 }
 
 output "internet_gateway_id" {
