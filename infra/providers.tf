@@ -7,7 +7,7 @@ terraform {
   }
 
   # backend "s3" {
-  #   bucket  = "terraform-state-bucket"
+  #   bucket  = "terraform-state-bucket-nexTime"
   #   key     = "nexTime/infra.tfstate"
   #   region  = "us-east-1"
   #   encrypt = true

@@ -8,7 +8,6 @@ resource "aws_s3_bucket" "terraform_state" {
   }
 }
 
-# Política de versionamento para guardar histórico de states
 resource "aws_s3_bucket_versioning" "versioning" {
   bucket = aws_s3_bucket.terraform_state.id
 
@@ -17,7 +16,6 @@ resource "aws_s3_bucket_versioning" "versioning" {
   }
 }
 
-# Criptografia por padrão
 resource "aws_s3_bucket_server_side_encryption_configuration" "encryption" {
   bucket = aws_s3_bucket.terraform_state.id
 
