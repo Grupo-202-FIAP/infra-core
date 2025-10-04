@@ -1,6 +1,7 @@
 # VPC
 vpc_name   = "infra-vpc"
 cidr_block = "10.0.0.0/16"
+region = "us-east-1"
 
 # Subnets
 subnet_name     = "infra-subnet"
@@ -45,3 +46,6 @@ api_gw_name        = "crud-api"
 api_gw_description = "CRUD API Gateway"
 api_gw_root_path   = "items"
 api_stage_name  = "dev"
+
+# S3
+bucket_name = "terraform-state-bucket"

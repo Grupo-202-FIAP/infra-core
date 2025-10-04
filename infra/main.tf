@@ -39,13 +39,13 @@ module "nat_gateway" {
 }
 
 module "route_table" {
-  source     = "./modules/route_table"
+  source           = "./modules/route_table"
   route_table_name = var.route_table_name
-  vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.public_subnet.public_subnet_ids
-  gateway_id = module.internet_gateway.igw_id
-  route_cidr = var.route_cidr
-  tags       = var.tags
+  vpc_id           = module.vpc.vpc_id
+  subnet_ids       = module.public_subnet.public_subnet_ids
+  gateway_id       = module.internet_gateway.igw_id
+  route_cidr       = var.route_cidr
+  tags             = var.tags
 }
 
 module "security_group_api" {
@@ -93,4 +93,9 @@ module "rds_instance" {
   allocated_storage = var.allocated_storage
   engine            = var.engine
   engine_version    = var.engine_version
+}
+
+module "s3" {
+  source      = "./modules/s3"
+  bucket_name = var.bucket_name
 }

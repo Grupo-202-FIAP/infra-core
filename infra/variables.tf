@@ -1,7 +1,7 @@
 variable "vpc_name" {
   type        = string
   description = "Nome da VPC"
-  default = ""
+  default     = ""
 }
 
 variable "subnet_name" {
@@ -82,23 +82,23 @@ variable "rds_password_ssm_path" {
 }
 
 variable "instance_class" {
-description = "Classe da instância RDS (ex: db.t3.micro, db.m6g.large)."
-type        = string
+  description = "Classe da instância RDS (ex: db.t3.micro, db.m6g.large)."
+  type        = string
 }
 
 variable "allocated_storage" {
-description = "Tamanho inicial do armazenamento alocado para a instância RDS em GB."
-type        = number
+  description = "Tamanho inicial do armazenamento alocado para a instância RDS em GB."
+  type        = number
 }
 
 variable "engine" {
-description = "Engine do banco de dados (ex: postgres, mysql, oracle-se2)."
-type        = string
+  description = "Engine do banco de dados (ex: postgres, mysql, oracle-se2)."
+  type        = string
 }
 
 variable "engine_version" {
-description = "Versão principal do Engine do banco de dados (ex: 15, 14.7)."
-type        = string
+  description = "Versão principal do Engine do banco de dados (ex: 15, 14.7)."
+  type        = string
 }
 
 variable "api_gw_name" {
@@ -129,4 +129,14 @@ variable "rds_identifier_name" {
 variable "route_table_name" {
   description = "Nome do recurso para a Tabela de Rotas Pública (ex: infra-public-rt)."
   type        = string
+}
+
+variable "bucket_name" {
+  description = "Nome do bucket"
+  type        = string
+}
+
+variable "region" {
+  description = "Região da AWS"
+  type = string
 }
