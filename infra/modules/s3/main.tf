@@ -1,18 +1,23 @@
+# Criação do bucket S3
 resource "aws_s3_bucket" "terraform_state" {
   bucket = var.bucket_name
 
   tags = {
-    Name = "terraform-remote-state-bucket"
+    Name        = "terraform-state"
+    Environment = var.environment
   }
 }
 
+# Política de versionamento para guardar histórico de states
 resource "aws_s3_bucket_versioning" "versioning" {
   bucket = aws_s3_bucket.terraform_state.id
+
   versioning_configuration {
     status = "Enabled"
   }
 }
 
+# Criptografia por padrão
 resource "aws_s3_bucket_server_side_encryption_configuration" "encryption" {
   bucket = aws_s3_bucket.terraform_state.id
 
