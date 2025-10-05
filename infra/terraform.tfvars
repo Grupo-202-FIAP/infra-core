@@ -48,4 +48,4 @@ api_gw_root_path   = "items"
 api_stage_name  = "dev"
 
 # S3
-bucket_name = "terraform-state-bucket-nexTime"
+bucket_name = "terraform-state-bucket-nextime"
