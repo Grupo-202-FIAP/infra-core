@@ -1,6 +1,7 @@
 variable "vpc_id" {
   type        = string
   description = "ID da VPC"
+  default = ""
 }
 
 variable "subnet_ids" {
@@ -23,4 +24,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
   description = "Tags aplicadas à route table"
+}
+
+variable "route_table_name" {
+  description = "Nome da Tabela de Rotas."
+  type        = string
 }

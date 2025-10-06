@@ -10,7 +10,3 @@ resource "aws_nat_gateway" "this" {
 
   depends_on = [aws_eip.nat]
 }
-
-output "nat_gateway_id" {
-  value = aws_nat_gateway.this.id
-}

@@ -3,6 +3,11 @@ variable "subnet_name" {
   description = "Prefixo para nome das subnets"
 }
 
+variable "subnet_group_name" {
+  type        = string
+  description = "Nome para o grupo nome das subnets"
+}
+
 variable "vpc_id" {
   type        = string
   description = "ID da VPC"
@@ -11,11 +16,6 @@ variable "vpc_id" {
 variable "azs" {
   type        = list(string)
   description = "Zonas de disponibilidade"
-}
-
-variable "public_subnets" {
-  type        = list(string)
-  description = "CIDRs das subnets públicas"
 }
 
 variable "private_subnets" {
