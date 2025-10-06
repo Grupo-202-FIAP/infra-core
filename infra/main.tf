@@ -85,6 +85,7 @@ module "rds_instance" {
   rds_identifier_name  = var.rds_identifier_name
   rds_sg_ids           = [module.security_group_postgres.postgres_sg_id]
   db_subnet_group_name = module.private_subnet.subnet_group_name
+  private_subnet_ids   = module.private_subnet.private_subnet_ids
 
   rds_username_secret_name = var.rds_username_ssm_path
   rds_password_secret_name = var.rds_password_ssm_path

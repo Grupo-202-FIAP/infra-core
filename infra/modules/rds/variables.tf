@@ -1,46 +1,49 @@
 variable "rds_identifier_name" {
-  description = "Nome do banco de dados inicial a ser criado no RDS."
-  type        = string
-  default     = " "
-}
-#
-variable "rds_username_secret_name" {
-  description = "O ARN ou nome do segredo no AWS Secrets Manager que contém o nome de usuário do DB."
-  type        = string
-}
-
-variable "rds_password_secret_name" {
-  description = "O ARN ou nome do segredo no AWS Secrets Manager que contém a senha do DB."
-  type        = string
-  sensitive   = true
-}
-
-variable "rds_sg_ids" {
-  description = "Lista de IDs de Security Groups a serem anexados ao RDS."
-  type        = list(string)
-}
-
-variable "db_subnet_group_name" {
-  description = "O nome do DB Subnet Group para posicionar o RDS."
+  description = "Identificador do RDS"
   type        = string
 }
 
 variable "allocated_storage" {
-  description = "Armazenamento alocado em GB para a instância RDS."
+  description = "Espaço em disco do RDS"
   type        = number
 }
 
 variable "instance_class" {
-  description = "Classe da instância RDS (ex: db.t3.micro para Free Tier)."
+  description = "Tipo da instância do RDS"
   type        = string
 }
 
 variable "engine" {
-  description = "Motor do banco de dados (ex: postgres, mysql)."
+  description = "Tipo de banco de dados"
   type        = string
 }
 
 variable "engine_version" {
-  description = "Versão do motor do banco de dados (ex: 15.5)."
+  description = "Versão do banco"
+  type        = string
+}
+
+variable "rds_username_secret_name" {
+  description = "Nome do parâmetro SSM para o usuário"
+  type        = string
+}
+
+variable "rds_password_secret_name" {
+  description = "Nome do parâmetro SSM para a senha"
+  type        = string
+}
+
+variable "rds_sg_ids" {
+  description = "Lista de Security Groups para o RDS"
+  type        = list(string)
+}
+
+variable "private_subnet_ids" {
+  description = "Lista de subnets privadas do RDS"
+  type        = list(string)
+}
+
+variable "db_subnet_group_name" {
+  description = "Nome do DB Subnet Group"
   type        = string
 }

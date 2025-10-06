@@ -1,3 +1,13 @@
+resource "aws_db_subnet_group" "infra_private" {
+  name        = var.db_subnet_group_name
+  description = "Subnets privadas para o RDS"
+  subnet_ids  = var.private_subnet_ids
+
+  tags = {
+    Name = var.db_subnet_group_name
+  }
+}
+
 resource "aws_db_instance" "rds" {
   identifier          = var.rds_identifier_name
   allocated_storage   = var.allocated_storage
@@ -10,9 +20,11 @@ resource "aws_db_instance" "rds" {
   password       = aws_ssm_parameter.rds_password.value
 
   vpc_security_group_ids = var.rds_sg_ids
-  db_subnet_group_name   = var.db_subnet_group_name
+  db_subnet_group_name   = aws_db_subnet_group.infra_private.name
 
   skip_final_snapshot = true
+
+  depends_on = [aws_db_subnet_group.infra_private]
 }
 
 resource "aws_ssm_parameter" "rds_username" {
@@ -23,14 +35,12 @@ resource "aws_ssm_parameter" "rds_username" {
   overwrite   = true
 }
 
-
 resource "aws_ssm_parameter" "rds_password" {
   name        = var.rds_password_secret_name
   description = "RDS Master Password para o ambiente Dev Fastfood"
   type        = "SecureString"
-
-  value     = random_password.rds_password.result
-  overwrite = true
+  value       = random_password.rds_password.result
+  overwrite   = true
 }
 
 resource "random_password" "rds_password" {

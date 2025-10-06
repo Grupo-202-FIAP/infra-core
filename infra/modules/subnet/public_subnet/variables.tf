@@ -14,7 +14,7 @@ variable "azs" {
 }
 
 variable "public_subnets" {
-  type        = string
+  type        = list(string)
   description = "CIDRs das subnets públicas"
 }
 
