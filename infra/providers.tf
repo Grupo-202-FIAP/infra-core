@@ -6,7 +6,6 @@ terraform {
     }
   }
 
-# TODO comentar antes de rodar pela primeira vez
   backend "s3" {
     bucket  = "terraform-state-bucket-nextime"
     key     = "infra.tfstate"
