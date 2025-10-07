@@ -80,22 +80,6 @@ module "api_gateway" {
   stage_name  = var.api_stage_name
 }
 
-module "rds_instance" {
-  source               = "./modules/rds"
-  rds_identifier_name  = var.rds_identifier_name
-  rds_sg_ids           = [module.security_group_postgres.postgres_sg_id]
-  db_subnet_group_name = module.private_subnet.subnet_group_name
-  private_subnet_ids   = module.private_subnet.private_subnet_ids
-
-  rds_username_secret_name = var.rds_username_ssm_path
-  rds_password_secret_name = var.rds_password_ssm_path
-
-  instance_class    = var.instance_class
-  allocated_storage = var.allocated_storage
-  engine            = var.engine
-  engine_version    = var.engine_version
-}
-
 module "s3" {
   source      = "./modules/s3"
   bucket_name = var.bucket_name
