@@ -47,3 +47,8 @@ variable "db_subnet_group_name" {
   description = "Nome do DB Subnet Group"
   type        = string
 }
+
+variable "rds_url_secret_name" {
+  description = "Nome do parâmetro no SSM para a URL de conexão completa."
+  type        = string
+}

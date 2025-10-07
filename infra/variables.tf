@@ -81,6 +81,11 @@ variable "rds_password_ssm_path" {
   type        = string
 }
 
+variable "rds_url_ssm_path" {
+  description = "Caminho (name) no SSM Parameter Store para a url do RDS."
+  type        = string
+}
+
 variable "instance_class" {
   description = "Classe da instância RDS (ex: db.t3.micro, db.m6g.large)."
   type        = string

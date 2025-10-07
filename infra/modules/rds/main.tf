@@ -52,3 +52,15 @@ resource "random_password" "rds_password" {
   min_lower        = 1
   min_numeric      = 1
 }
+
+resource "aws_ssm_parameter" "rds_connection_url" {
+
+  name        = var.rds_url_secret_name
+  description = "URL de Conexão Completa para o RDS (Formato URI)"
+  type        = "SecureString"
+
+  value = "postgres://${aws_ssm_parameter.rds_username.value}:${aws_ssm_parameter.rds_password.value}@${aws_db_instance.rds.address}:${aws_db_instance.rds.port}/${var.rds_identifier_name}"
+
+  overwrite = true
+}
+

@@ -36,6 +36,7 @@ tags = {
 rds_identifier_name  = "db-fastfood"
 rds_username_ssm_path = "/fastfood/rds/username"
 rds_password_ssm_path = "/fastfood/rds/password"
+rds_url_ssm_path     = "/fastfood/rds/url"
 instance_class = "db.t3.micro"
 allocated_storage = 50
 engine = "postgres"
