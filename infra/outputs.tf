@@ -37,3 +37,8 @@ output "network_acl_id" {
   description = "ID do Network ACL"
   value       = module.acl.acl_id
 }
+
+output "db_host_name" {
+  description = "Host name do banco de dados RDS"
+  value = module.rds_instance.rds_endpoint
+}
