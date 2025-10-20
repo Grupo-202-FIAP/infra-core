@@ -1,22 +1,46 @@
+# Nome da API Gateway
 variable "name" {
-  description = "API Gateway Tech challenge"
   type        = string
+  description = "Nome da API Gateway HTTP v2"
 }
 
+# Descrição da API
 variable "description" {
-  description = "Descrição do API Gateway"
   type        = string
-  default     = "API Gateway gerenciado pelo Terraform"
+  description = "Descrição da API Gateway"
+  default     = "Gateway central nexTimeFood (EKS + Authorizer)"
 }
 
-variable "root_path" {
-  description = "Path raiz do recurso do API Gateway"
-  type        = string
-  default     = "items"
-}
-
+# Nome do stage
 variable "stage_name" {
-  description = "Nome do stage para o deployment"
   type        = string
+  description = "Nome do stage da API Gateway"
   default     = "dev"
+}
+
+# variable "eks_alb_dns_name" {
+#   type        = string
+#   description = "DNS do ALB que faz proxy para o backend no EKS"
+#   default     = ""
+# }
+
+variable "lambda_authorizer_function_name" {
+  type        = string
+  description = "Nome da Lambda Authorizer (login)"
+}
+
+variable "lambda_authorizer_invoke_arn" {
+  type        = string
+  description = "ARN de invocação da Lambda Authorizer"
+}
+
+# Lambda Registration
+variable "lambda_registration_function_name" {
+  type        = string
+  description = "Nome da Lambda Registration (cadastro)"
+}
+
+variable "lambda_registration_invoke_arn" {
+  type        = string
+  description = "ARN de invocação da Lambda Registration"
 }

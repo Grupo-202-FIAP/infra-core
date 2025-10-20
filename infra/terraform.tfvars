@@ -41,11 +41,15 @@ allocated_storage = 50
 engine = "postgres"
 engine_version = "15"
 
-# Gateway
-api_gw_name        = "crud-api"
-api_gw_description = "CRUD API Gateway"
-api_gw_root_path   = "items"
-api_stage_name  = "dev"
-
 # S3
 bucket_name = "terraform-state-bucket-nextime"
+
+# =====================
+# API Gateway
+# =====================
+api_gw_name         = "nexTimeFoodAPI"
+api_gw_description  = "Gateway HTTP central para nexTimeFood (EKS + Lambdas)"
+api_gw_stage_name   = "dev"
+
+# Backend EKS
+eks_alb_dns_name    = "http://internal-nexfood-alb-123456.us-east-1.elb.amazonaws.com"

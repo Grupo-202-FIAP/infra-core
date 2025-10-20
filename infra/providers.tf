@@ -6,12 +6,12 @@ terraform {
     }
   }
 
-  backend "s3" {
-    bucket  = "terraform-state-bucket-nextime"
-    key     = "infra.tfstate"
-    region  = "us-east-1"
-    encrypt = true
-  }
+  # backend "s3" {
+  #   bucket  = "terraform-state-bucket-nextime"
+  #   key     = "network/infra.tfstate"
+  #   region  = "us-east-1"
+  #   encrypt = true
+  # }
 
 }
 
