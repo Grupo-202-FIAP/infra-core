@@ -106,8 +106,13 @@ variable "rds_identifier_name" {
   type        = string
 }
 
-variable "route_table_name" {
+variable "route_table_public_name" {
   description = "Nome do recurso para a Tabela de Rotas Pública (ex: infra-public-rt)."
+  type        = string
+}
+
+variable "route_table_private_name" {
+  description = "Nome do recurso para a Tabela de Rotas Privada (ex: infra-private-rt)."
   type        = string
 }
 

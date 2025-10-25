@@ -17,7 +17,8 @@ nat_name = "infra-nat-gateway"
 igw_name = "infra-igw"
 
 # Route Table
-route_table_name = "infra-public-route-table"
+route_table_public_name = "infra-public-route-table"
+route_table_private_name = "infra-private-route-table"
 route_cidr = "0.0.0.0/0"
 
 # Security Groups
