@@ -54,3 +54,15 @@ api_gw_stage_name   = "dev"
 
 # Backend EKS
 eks_alb_dns_name    = "http://internal-nexfood-alb-123456.us-east-1.elb.amazonaws.com"
+
+# =====================
+# SQS
+# =====================
+sqs_queue_name                 = "fastfood-queue"
+sqs_delay_seconds              = 0
+sqs_max_message_size           = 262144
+sqs_message_retention_seconds  = 345600
+sqs_receive_wait_time_seconds  = 0
+sqs_visibility_timeout_seconds = 30
+sqs_max_receive_count          = 3
+sqs_enable_queue_policy        = false
