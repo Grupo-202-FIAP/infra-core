@@ -42,23 +42,3 @@ output "db_host_name" {
   description = "Host name do banco de dados RDS"
   value = module.rds_instance.rds_endpoint
 }
-
-output "sqs_queue_id" {
-  description = "ID da fila SQS"
-  value       = module.sqs.sqs_queue_id
-}
-
-output "sqs_queue_arn" {
-  description = "ARN da fila SQS"
-  value       = module.sqs.sqs_queue_arn
-}
-
-output "sqs_queue_url" {
-  description = "URL da fila SQS"
-  value       = module.sqs.sqs_queue_url
-}
-
-output "sqs_queue_name" {
-  description = "Nome da fila SQS"
-  value       = module.sqs.sqs_queue_name
-}

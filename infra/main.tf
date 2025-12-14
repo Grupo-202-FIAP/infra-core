@@ -118,19 +118,3 @@ module "s3" {
   source      = "./modules/s3"
   bucket_name = var.bucket_name
 }
-
-module "sqs" {
-  source                      = "./modules/sqs"
-  queue_name                  = var.sqs_queue_name
-  delay_seconds               = var.sqs_delay_seconds
-  max_message_size            = var.sqs_max_message_size
-  message_retention_seconds   = var.sqs_message_retention_seconds
-  receive_wait_time_seconds   = var.sqs_receive_wait_time_seconds
-  visibility_timeout_seconds  = var.sqs_visibility_timeout_seconds
-  dead_letter_queue_arn       = var.sqs_dead_letter_queue_arn
-  max_receive_count           = var.sqs_max_receive_count
-  kms_master_key_id           = var.sqs_kms_master_key_id
-  enable_queue_policy         = var.sqs_enable_queue_policy
-  queue_policy                = var.sqs_queue_policy
-  tags                        = var.tags
-}
