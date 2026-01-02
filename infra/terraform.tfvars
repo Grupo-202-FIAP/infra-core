@@ -29,14 +29,8 @@ acl_name = "infra-acl"
 
 # Tags
 tags = {
-  Owner = "fast-food-fiap"
+  Owner = "nexTime-food"
 }
-
-# Gateway
-api_gw_name        = "crud-api"
-api_gw_description = "CRUD API Gateway"
-api_gw_root_path   = "items"
-api_stage_name  = "dev"
 
 # S3
 bucket_name = "terraform-state-bucket-nextime1"
