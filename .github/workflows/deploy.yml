@@ -55,6 +55,8 @@ jobs:
         run: |
           aws sts get-caller-identity
           aws s3 ls s3://terraform-state-bucket-nextime
+          
+      - run: aws s3 ls
 
       - name: Terraform Init
         run: terraform init
