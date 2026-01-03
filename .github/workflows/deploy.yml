@@ -5,17 +5,46 @@ on:
     branches:
       - dev
 
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+
 jobs:
-  deploy-to-aws:
+  bootstrap:
+    name: Terraform Bootstrap
     runs-on: ubuntu-latest
 
-    permissions:
-      id-token: write
-      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    env:
-      AWS_REGION: us-east-1
-      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.2.0
+
+      - name: Configure AWS credentials (OIDC + IAM Role)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/github-action-role
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Terraform Init (bootstrap)
+        run: terraform init
+        working-directory: bootstrap
+
+      - name: Terraform Apply (bootstrap)
+        run: terraform apply -auto-approve
+        working-directory: bootstrap
+
+  deploy-to-aws:
+    name: Terraform Infra
+    runs-on: ubuntu-latest
+    needs: bootstrap
 
     steps:
       - name: Checkout repository
@@ -36,11 +65,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-terraform-
 
-      - name: Debug GitHub context
-        run: |
-          echo "GITHUB_REPOSITORY=$GITHUB_REPOSITORY"
-          echo "GITHUB_REF=$GITHUB_REF"
-
       - name: Configure AWS credentials (OIDC + IAM Role)
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -51,9 +75,7 @@ jobs:
         run: terraform fmt -check -diff || true
         working-directory: infra
 
-      - run: aws s3 ls
-
-      - name: Terraform Init
+      - name: Terraform Init (infra)
         run: terraform init
         working-directory: infra
 
