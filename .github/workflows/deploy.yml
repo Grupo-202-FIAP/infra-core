@@ -35,11 +35,11 @@ jobs:
 
       - name: Terraform Init (bootstrap)
         run: terraform init
-        working-directory: bootstrap
+        working-directory: infra/bootstrap
 
       - name: Terraform Apply (bootstrap)
         run: terraform apply -auto-approve
-        working-directory: bootstrap
+        working-directory: infra/bootstrap
 
   deploy-to-aws:
     name: Terraform Infra
