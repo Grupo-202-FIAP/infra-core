@@ -33,4 +33,4 @@ tags = {
 }
 
 # S3
-bucket_name = "terraform-state-bucket-nextime"
+bucket_name = "nextime-food-state-bucket"
