@@ -36,6 +36,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-terraform-
 
+      - name: Debug GitHub context
+        run: |
+          echo "GITHUB_REPOSITORY=$GITHUB_REPOSITORY"
+          echo "GITHUB_REF=$GITHUB_REF"
+
       - name: Configure AWS credentials (OIDC + IAM Role)
         uses: aws-actions/configure-aws-credentials@v4
         with:
