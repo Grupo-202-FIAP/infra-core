@@ -75,7 +75,7 @@ jobs:
         run: terraform fmt -check -diff || true
         working-directory: infra
 
-      - name: Terraform Init (infra)
+      - name: Terraform Init
         run: terraform init
         working-directory: infra
 
