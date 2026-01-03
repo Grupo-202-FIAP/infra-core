@@ -72,14 +72,6 @@ module "acl" {
   tags      = var.tags
 }
 
-module "api_gateway" {
-  source      = "./modules/api_gateway"
-  name        = var.api_gw_name
-  description = var.api_gw_description
-  root_path   = var.api_gw_root_path
-  stage_name  = var.api_stage_name
-}
-
 module "s3" {
   source      = "./modules/s3"
   bucket_name = var.bucket_name
