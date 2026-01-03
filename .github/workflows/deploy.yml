@@ -51,6 +51,11 @@ jobs:
         run: terraform fmt -check -diff || true
         working-directory: infra
 
+      - name: Test backend access
+        run: |
+          aws sts get-caller-identity
+          aws s3 ls s3://terraform-state-bucket-nextime
+
       - name: Terraform Init
         run: terraform init
         working-directory: infra
