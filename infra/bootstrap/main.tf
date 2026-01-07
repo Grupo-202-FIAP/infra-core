@@ -22,7 +22,7 @@
 # resource "aws_s3_bucket_server_side_encryption_configuration" "encryption" {
 #   bucket = aws_s3_bucket.terraform_state.id
 
-```terraform
+ 
 # Criação do bucket S3 (condicional)
 resource "aws_s3_bucket" "terraform_state" {
 	count  = var.enable_s3 ? 1 : 0
@@ -57,4 +57,4 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "encryption" {
 	}
 }
 
-```
+ 
