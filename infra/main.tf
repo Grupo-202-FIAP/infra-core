@@ -63,6 +63,17 @@ module "security_group_postgres" {
   tags             = var.tags
 }
 
+# 🔹 DB Subnet Group para RDS
+resource "aws_db_subnet_group" "rds_subnet_group" {
+  name       = var.subnet_group_name
+  subnet_ids = module.private_subnet.private_subnet_ids
+
+  tags = merge(
+    { Name = var.subnet_group_name },
+    var.tags
+  )
+}
+
 # 🔹 ACL
 module "acl" {
   source    = "./modules/acl"
