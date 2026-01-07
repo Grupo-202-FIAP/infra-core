@@ -38,6 +38,15 @@ module "nat_gateway" {
   tags             = var.tags
 }
 
+module "route_table_private" {
+  source           = "./modules/route_table_private"
+  route_table_name = "private-route-table"
+  vpc_id           = module.vpc.vpc_id
+  subnet_ids       = module.private_subnet.private_subnet_ids
+  nat_gateway_id   = module.nat_gateway.nat_gateway_id
+  tags             = var.tags
+}
+
 module "route_table" {
   source           = "./modules/route_table"
   route_table_name = var.route_table_name
