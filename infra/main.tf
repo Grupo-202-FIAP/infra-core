@@ -73,51 +73,51 @@ module "security_group_postgres" {
 }
 
 # VPC Endpoint for Cognito (Interface) + SG to allow Lambdas to reach Cognito via endpoint
-resource "aws_security_group" "vpc_endpoint_cognito_sg" {
-  name        = "vpc-endpoint-cognito"
-  description = "Security group for Cognito VPC Endpoint"
-  vpc_id      = module.vpc.vpc_id
+# resource "aws_security_group" "vpc_endpoint_cognito_sg" {
+#   name        = "vpc-endpoint-cognito"
+#   description = "Security group for Cognito VPC Endpoint"
+#   vpc_id      = module.vpc.vpc_id
 
-  ingress {
-    description     = "Allow Lambdas (private SG) to connect to endpoint"
-    from_port       = 443
-    to_port         = 443
-    protocol        = "tcp"
-    security_groups = [module.security_group_postgres.postgres_sg_id]
-  }
+#   ingress {
+#     description     = "Allow Lambdas (private SG) to connect to endpoint"
+#     from_port       = 443
+#     to_port         = 443
+#     protocol        = "tcp"
+#     security_groups = [module.security_group_postgres.postgres_sg_id]
+#   }
 
-  egress {
-    description = "Allow all outbound"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+#   egress {
+#     description = "Allow all outbound"
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
 
-  tags = var.tags
-}
+#   tags = var.tags
+# }
 
-resource "aws_vpc_endpoint" "cognito_idp" {
-  vpc_id             = module.vpc.vpc_id
-  service_name       = "com.amazonaws.${var.region}.cognito-idp"
-  vpc_endpoint_type  = "Interface"
-  subnet_ids         = module.private_subnet.private_subnet_ids
-  security_group_ids = [aws_security_group.vpc_endpoint_cognito_sg.id]
-  private_dns_enabled = false
+# resource "aws_vpc_endpoint" "cognito_idp" {
+#   vpc_id             = module.vpc.vpc_id
+#   service_name       = "com.amazonaws.${var.region}.cognito-idp"
+#   vpc_endpoint_type  = "Interface"
+#   subnet_ids         = module.private_subnet.private_subnet_ids
+#   security_group_ids = [aws_security_group.vpc_endpoint_cognito_sg.id]
+#   private_dns_enabled = false
 
-  tags = merge({ Name = "vpce-cognito-idp" }, var.tags)
-}
+#   tags = merge({ Name = "vpce-cognito-idp" }, var.tags)
+# }
 
 # 🔹 DB Subnet Group para RDS
-resource "aws_db_subnet_group" "rds_subnet_group" {
-  name       = var.subnet_group_name
-  subnet_ids = module.private_subnet.private_subnet_ids
+# resource "aws_db_subnet_group" "rds_subnet_group" {
+#   name       = var.subnet_group_name
+#   subnet_ids = module.private_subnet.private_subnet_ids
 
-  tags = merge(
-    { Name = var.subnet_group_name },
-    var.tags
-  )
-}
+#   tags = merge(
+#     { Name = var.subnet_group_name },
+#     var.tags
+#   )
+# }
 
 # 🔹 ACL
 module "acl" {
