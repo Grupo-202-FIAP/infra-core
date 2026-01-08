@@ -34,7 +34,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Terraform Init (bootstrap)
-        run: terraform init
+        run: terraform init -reconfigure
         working-directory: infra/bootstrap
 
       - name: Terraform Apply (bootstrap)
