@@ -74,7 +74,7 @@ module "security_group_postgres" {
 
 # VPC Endpoint for Cognito (Interface) + SG to allow Lambdas to reach Cognito via endpoint
 resource "aws_security_group" "vpc_endpoint_cognito_sg" {
-  name        = "sg-vpc-endpoint-cognito"
+  name        = "vpc-endpoint-cognito"
   description = "Security group for Cognito VPC Endpoint"
   vpc_id      = module.vpc.vpc_id
 
@@ -103,7 +103,7 @@ resource "aws_vpc_endpoint" "cognito_idp" {
   vpc_endpoint_type  = "Interface"
   subnet_ids         = module.private_subnet.private_subnet_ids
   security_group_ids = [aws_security_group.vpc_endpoint_cognito_sg.id]
-  private_dns_enabled = true
+  private_dns_enabled = false
 
   tags = merge({ Name = "vpce-cognito-idp" }, var.tags)
 }
