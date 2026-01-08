@@ -3,6 +3,17 @@ resource "aws_network_acl" "this" {
   tags   = merge({ Name = var.acl_name }, var.tags)
 }
 
+resource "aws_network_acl_rule" "allow_tcp_ephemeral_inbound" {
+  network_acl_id = aws_network_acl.this.id
+  rule_number    = 90
+  egress         = false
+  protocol       = "tcp"
+  rule_action    = "allow"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 1024
+  to_port        = 65535
+}
+
 resource "aws_network_acl_rule" "allow_http" {
   network_acl_id = aws_network_acl.this.id
   rule_number    = 100

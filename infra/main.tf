@@ -127,3 +127,12 @@ module "acl" {
   subnet_id = module.public_subnet.public_subnet_ids[0]
   tags      = var.tags
 }
+
+module "vpc_endpoint" {
+  source              = "./modules/vpc_endpoint"
+  vpc_id              = module.vpc.vpc_id
+  vpc_cidr            = var.cidr_block
+  private_subnet_ids  = module.private_subnet.private_subnet_ids
+  region              = var.region
+  tags                = var.tags
+}
