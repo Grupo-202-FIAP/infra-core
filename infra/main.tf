@@ -83,7 +83,7 @@ resource "aws_security_group" "vpc_endpoint_cognito_sg" {
     from_port       = 443
     to_port         = 443
     protocol        = "tcp"
-    security_groups = [module.security_group_postgres.security_group_id]
+    security_groups = [module.security_group_postgres.postgres_sg_id]
   }
 
   egress {
