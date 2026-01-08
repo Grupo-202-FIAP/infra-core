@@ -33,12 +33,7 @@ output "security_group_postgres_id" {
   value       = module.security_group_postgres.postgres_sg_id
 }
 
-# output "network_acl_id" {
-#   description = "ID do Network ACL"
-#   value       = module.acl.acl_id
-# }
-
-# output "db_subnet_group_name" {
-#   description = "Nome do DB Subnet Group para RDS"
-#   value       = aws_db_subnet_group.rds_subnet_group.name
-# }
+output "db_subnet_group_name" {
+  description = "Nome do DB Subnet Group para RDS"
+  value       = aws_db_subnet_group.rds_subnet_group.name
+}
