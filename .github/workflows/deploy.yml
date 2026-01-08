@@ -60,7 +60,6 @@ jobs:
         with:
           path: |
             ~/.terraform.d/plugin-cache
-            infra/.terraform
           key: ${{ runner.os }}-terraform-${{ hashFiles('infra/**/*.tf*') }}
           restore-keys: |
             ${{ runner.os }}-terraform-
@@ -73,6 +72,10 @@ jobs:
 
       - name: Terraform Format
         run: terraform fmt -check -diff || true
+        working-directory: infra
+
+      - name: Clean Terraform working dir
+        run: rm -rf .terraform .terraform.lock.hcl || true
         working-directory: infra
 
       - name: Terraform Init
