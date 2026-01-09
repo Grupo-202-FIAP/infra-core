@@ -27,6 +27,10 @@ sg_postgres_name = "infra-sg-postgres"
 # ACL
 acl_name = "infra-acl"
 
+# VPC Endpoints
+vpce_sg_name = "vpce-interface-sg"
+enable_private_dns_vpce = true
+
 # Tags
 tags = {
   Owner = "nexTime-food"
