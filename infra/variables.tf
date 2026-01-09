@@ -103,3 +103,14 @@ variable "region" {
   description = "Região da AWS"
   type = string
 }
+
+variable "vpce_sg_name" {
+  type        = string
+  description = "Nome do Security Group para VPC Endpoints"
+}
+
+variable "enable_private_dns_vpce" {
+  type        = bool
+  description = "Ativar DNS privado para VPC Endpoints"
+  default     = true
+}
