@@ -36,6 +36,50 @@ resource "aws_network_acl_rule" "allow_https" {
   to_port        = 443
 }
 
+resource "aws_network_acl_rule" "allow_dns_udp_inbound" {
+  network_acl_id = aws_network_acl.this.id
+  rule_number    = 70
+  egress         = false
+  protocol       = "udp"
+  rule_action    = "allow"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 53
+  to_port        = 53
+}
+
+resource "aws_network_acl_rule" "allow_dns_tcp_inbound" {
+  network_acl_id = aws_network_acl.this.id
+  rule_number    = 75
+  egress         = false
+  protocol       = "tcp"
+  rule_action    = "allow"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 53
+  to_port        = 53
+}
+
+resource "aws_network_acl_rule" "allow_dns_udp_outbound" {
+  network_acl_id = aws_network_acl.this.id
+  rule_number    = 70
+  egress         = true
+  protocol       = "udp"
+  rule_action    = "allow"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 53
+  to_port        = 53
+}
+
+resource "aws_network_acl_rule" "allow_dns_tcp_outbound" {
+  network_acl_id = aws_network_acl.this.id
+  rule_number    = 75
+  egress         = true
+  protocol       = "tcp"
+  rule_action    = "allow"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 53
+  to_port        = 53
+}
+
 resource "aws_network_acl_rule" "allow_all_egress" {
   network_acl_id = aws_network_acl.this.id
   rule_number    = 200
