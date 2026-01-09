@@ -118,7 +118,7 @@ resource "aws_vpc_endpoint" "cognito_idp" {
   vpc_id             = module.vpc.vpc_id
   service_name       = "com.amazonaws.${var.region}.cognito-idp"
   vpc_endpoint_type  = "Interface"
-  subnet_ids         = module.private_subnet.private_subnet_ids
+  subnet_ids         = [module.private_subnet.private_subnet_ids[0]]
   security_group_ids = [aws_security_group.vpc_endpoint_cognito_sg.id]
   private_dns_enabled = true
 
