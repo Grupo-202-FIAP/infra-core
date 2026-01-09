@@ -64,12 +64,29 @@ module "security_group_api" {
   tags        = var.tags
 }
 
-module "security_group_postgres" {
-  source           = "./modules/security_group/private_sg"
-  sg_postgres_name = var.sg_postgres_name
+module "security_group_bastion" {
+  source           = "./modules/security_group/bastion_sg"
+  sg_bastion_name  = var.sg_bastion_name
   vpc_id           = module.vpc.vpc_id
-  api_sg_id        = module.security_group_api.security_group_id
+  allowed_ssh_cidr = var.allowed_ssh_cidr
   tags             = var.tags
+}
+
+module "security_group_lambda" {
+  source         = "./modules/security_group/lambda_sg"
+  sg_lambda_name = var.sg_lambda_name
+  vpc_id         = module.vpc.vpc_id
+  tags           = var.tags
+}
+
+module "security_group_postgres" {
+  source         = "./modules/security_group/private_sg"
+  sg_postgres_name = var.sg_postgres_name
+  vpc_id         = module.vpc.vpc_id
+  api_sg_id      = module.security_group_api.security_group_id
+  bastion_sg_id  = module.security_group_bastion.bastion_sg_id
+  lambda_sg_id   = module.security_group_lambda.lambda_sg_id
+  tags           = var.tags
 }
 
 # VPC Endpoint for Cognito (Interface) + SG to allow Lambdas to reach Cognito via endpoint
@@ -79,11 +96,11 @@ resource "aws_security_group" "vpc_endpoint_cognito_sg" {
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    description     = "Allow Lambdas (private SG) to connect to endpoint"
+    description     = "Allow Lambdas (lambda SG) to connect to endpoint"
     from_port       = 443
     to_port         = 443
     protocol        = "tcp"
-    security_groups = [module.security_group_postgres.postgres_sg_id]
+    security_groups = [module.security_group_lambda.lambda_sg_id]
   }
 
   egress {
@@ -103,7 +120,7 @@ resource "aws_vpc_endpoint" "cognito_idp" {
   vpc_endpoint_type  = "Interface"
   subnet_ids         = module.private_subnet.private_subnet_ids
   security_group_ids = [aws_security_group.vpc_endpoint_cognito_sg.id]
-  private_dns_enabled = false
+  private_dns_enabled = true
 
   tags = merge({ Name = "vpce-cognito-idp" }, var.tags)
 }
