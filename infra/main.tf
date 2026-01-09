@@ -126,10 +126,6 @@ module "security_group_postgres" {
 #   tags = merge({ Name = "vpce-cognito-idp" }, var.tags)
 # }
 
- 
-
-
-
 #🔹 DB Subnet Group para RDS
 resource "aws_db_subnet_group" "rds_subnet_group" {
   name       = var.subnet_group_name
