@@ -34,6 +34,24 @@ variable "sg_postgres_name" {
   description = "Nome do Security Group do PostgreSQL"
 }
 
+variable "sg_bastion_name" {
+  type        = string
+  description = "Nome do Security Group do Bastion Host"
+  default     = "infra-sg-bastion"
+}
+
+variable "sg_lambda_name" {
+  type        = string
+  description = "Nome do Security Group das Lambdas"
+  default     = "infra-sg-lambda"
+}
+
+variable "allowed_ssh_cidr" {
+  type        = string
+  description = "CIDR block allowed to SSH to bastion"
+  default     = "0.0.0.0/0"
+}
+
 variable "acl_name" {
   type        = string
   description = "Nome do Network ACL"
