@@ -48,16 +48,16 @@ resource "aws_vpc_endpoint" "sts" {
 }
 
 # 🔹 VPC Endpoints para serviços AWS
-resource "aws_vpc_endpoint" "cognito_idp" {
-  vpc_id              = var.vpc_id
-  service_name        = "com.amazonaws.${var.region}.cognito-idp"
-  vpc_endpoint_type   = "Interface"
-  subnet_ids          = var.private_subnet_ids
-  security_group_ids  = [aws_security_group.vpc_endpoints.id]
-  private_dns_enabled = var.enable_private_dns_vpce
+# resource "aws_vpc_endpoint" "cognito_idp" {
+#   vpc_id              = var.vpc_id
+#   service_name        = "com.amazonaws.${var.region}.cognito-idp"
+#   vpc_endpoint_type   = "Interface"
+#   subnet_ids          = var.private_subnet_ids
+#   security_group_ids  = [aws_security_group.vpc_endpoints.id]
+#   private_dns_enabled = var.enable_private_dns_vpce
 
-  tags = merge({ Name = "vpce-cognito-idp" }, var.tags)
-}
+#   tags = merge({ Name = "vpce-cognito-idp" }, var.tags)
+# }
 
 resource "aws_vpc_endpoint" "ssm" {
   vpc_id              = var.vpc_id
