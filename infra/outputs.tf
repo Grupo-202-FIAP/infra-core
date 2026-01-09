@@ -28,8 +28,23 @@ output "security_group_api_id" {
   value       = module.security_group_api.security_group_id
 }
 
+output "sg_bastion_id" {
+  description = "ID do Security Group do Bastion Host"
+  value       = module.security_group_bastion.bastion_sg_id
+}
+
+output "sg_lambda_id" {
+  description = "ID do Security Group das Lambdas"
+  value       = module.security_group_lambda.lambda_sg_id
+}
+
+output "sg_rds_id" {
+  description = "ID do Security Group do RDS (PostgreSQL)"
+  value       = module.security_group_postgres.postgres_sg_id
+}
+
 output "security_group_postgres_id" {
-  description = "ID do Security Group do PostgreSQL"
+  description = "ID do Security Group do PostgreSQL (compatibilidade)"
   value       = module.security_group_postgres.postgres_sg_id
 }
 

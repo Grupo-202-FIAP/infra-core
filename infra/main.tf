@@ -64,12 +64,29 @@ module "security_group_api" {
   tags        = var.tags
 }
 
-module "security_group_postgres" {
-  source           = "./modules/security_group/private_sg"
-  sg_postgres_name = var.sg_postgres_name
+module "security_group_bastion" {
+  source           = "./modules/security_group/bastion_sg"
+  sg_bastion_name  = var.sg_bastion_name
   vpc_id           = module.vpc.vpc_id
-  api_sg_id        = module.security_group_api.security_group_id
+  allowed_ssh_cidr = var.allowed_ssh_cidr
   tags             = var.tags
+}
+
+module "security_group_lambda" {
+  source         = "./modules/security_group/lambda_sg"
+  sg_lambda_name = var.sg_lambda_name
+  vpc_id         = module.vpc.vpc_id
+  tags           = var.tags
+}
+
+module "security_group_postgres" {
+  source         = "./modules/security_group/private_sg"
+  sg_postgres_name = var.sg_postgres_name
+  vpc_id         = module.vpc.vpc_id
+  api_sg_id      = module.security_group_api.security_group_id
+  bastion_sg_id  = module.security_group_bastion.bastion_sg_id
+  lambda_sg_id   = module.security_group_lambda.lambda_sg_id
+  tags           = var.tags
 }
 
 # VPC Endpoint for Cognito (Interface) + SG to allow Lambdas to reach Cognito via endpoint
