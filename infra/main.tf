@@ -89,7 +89,16 @@ module "security_group_postgres" {
   tags             = var.tags
 }
 
- 
+# 🔹 EC2 Bastion Instance
+module "ec2_bastion" {
+  source                  = "./modules/ec2_bastion"
+  bastion_instance_name   = var.bastion_instance_name
+  instance_type           = var.bastion_instance_type
+  public_subnet_id        = module.public_subnet.public_subnet_ids[0]
+  bastion_sg_id           = module.security_group_bastion.bastion_sg_id
+  key_pair_name           = var.key_pair_name
+  tags                    = var.tags
+}
 
 #🔹 DB Subnet Group para RDS
 resource "aws_db_subnet_group" "rds_subnet_group" {

@@ -26,6 +26,11 @@ sg_bastion_name  = "infra-sg-bastion"
 sg_lambda_name   = "infra-sg-lambda"
 sg_postgres_name = "infra-sg-postgres"
 
+# EC2 Bastion
+bastion_instance_name  = "infra-bastion-host"
+bastion_instance_type  = "t3.micro"
+key_pair_name          = "ssh_arch"
+
 # ACL
 acl_name = "infra-acl"
 
