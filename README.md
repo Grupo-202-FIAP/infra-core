@@ -225,9 +225,9 @@ private_subnets     = ["10.0.6.0/24", "10.0.10.0/24"]
 availability_zones  = ["us-east-1a", "us-east-1b"]
 
 # Bastion
+bastion_instance_name = "infra-bastion-host"
 bastion_instance_type = "t3.micro"
-bastion_key_name      = "ssh_arch"
-bastion_ssh_cidr      = "0.0.0.0/0"  # ⚠️ Ver Segurança
+key_pair_name         = "ssh_arch"
 
 # RDS
 db_engine = "postgres"
@@ -235,6 +235,21 @@ db_name   = "nexfood"
 ```
 
 Para modificar valores, edite `infra/terraform.tfvars`.
+
+### Configuração SSH do Bastion
+
+A regra de SSH para o Bastion **não é definida via Terraform** (comentada no módulo `bastion_sg`). Você deve configurar manualmente via AWS Console:
+
+1. Após `terraform apply`, vá para **AWS Console → EC2 → Security Groups**
+2. Localize o grupo `infra-sg-bastion`
+3. Clique em **Edit inbound rules**
+4. Adicione uma regra:
+   - **Type**: SSH
+   - **Port**: 22
+   - **Source**: Seu IP (ex: `203.0.113.5/32`)
+5. Clique **Save**
+
+Isso garante que você tenha controle total sobre quem pode acessar o Bastion.
 
 ## Outputs
 
@@ -264,15 +279,14 @@ terraform output vpc_id
 
 ### ⚠️ Alertas de Segurança
 
-1. **SSH CIDR Aberto**: Atualmente `bastion_ssh_cidr = "0.0.0.0/0"`
-   - **Risco**: Qualquer IP pode tentar acessar o Bastion
-   - **Recomendação**: Altere para seu IP público ou CIDR da sua rede
-   - **Exemplo**: `bastion_ssh_cidr = "203.0.113.0/32"`  (seu IP)
+1. **Acesso SSH Manual**: A regra de SSH não vem configurada por padrão
+   - **Motivo**: Você configurará manualmente via AWS Console
+   - **Procedimento**: Ver seção [Configuração SSH do Bastion](#configuração-ssh-do-bastion)
 
 2. **Bucket S3 Sem Encriptação**: O state file contém informações sensíveis
    - **Recomendação**: Ativar SSE-S3 e versionamento no bucket
 
-3. **Rds Sem Backup**: Banco de dados não configurado com backup automático
+3. **RDS Sem Backup**: Banco de dados não configurado com backup automático
    - **Recomendação**: Ativar backup retention e Multi-AZ
 
 ### Boas Práticas Implementadas
