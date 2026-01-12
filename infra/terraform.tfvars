@@ -22,6 +22,8 @@ route_cidr       = "0.0.0.0/0"
 
 # Security Groups
 sg_api_name      = "infra-sg-api"
+sg_bastion_name  = "infra-sg-bastion"
+sg_lambda_name   = "infra-sg-lambda"
 sg_postgres_name = "infra-sg-postgres"
 
 # ACL
