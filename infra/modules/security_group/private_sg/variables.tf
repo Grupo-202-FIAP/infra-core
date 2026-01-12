@@ -1,7 +1,7 @@
 variable "sg_postgres_name" {
   type        = string
   description = "Nome do SG do PostgreSQL"
-  default = ""
+  default     = ""
 }
 
 variable "vpc_id" {

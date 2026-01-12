@@ -37,7 +37,7 @@ variable "sg_postgres_name" {
 variable "sg_bastion_name" {
   type        = string
   description = "Nome do Security Group do Bastion Host"
-  default     = "infra-sg-bastion"
+  default     = "sg-bastion"
 }
 
 variable "sg_lambda_name" {
@@ -101,7 +101,7 @@ variable "bucket_name" {
 
 variable "region" {
   description = "Região da AWS"
-  type = string
+  type        = string
 }
 
 variable "vpce_sg_name" {

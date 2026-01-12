@@ -25,7 +25,7 @@ variable "tags" {
   default     = {}
 }
 
- variable "enable_private_dns_vpce" {
+variable "enable_private_dns_vpce" {
   type        = bool
   description = "Enable private DNS for VPC endpoints"
   default     = true

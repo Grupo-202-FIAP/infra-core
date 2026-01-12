@@ -1,7 +1,7 @@
 variable "nat_name" {
   type        = string
   description = "Nome do NAT Gateway"
-  default = ""
+  default     = ""
 }
 
 variable "public_subnet_id" {

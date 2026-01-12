@@ -1,7 +1,7 @@
 variable "vpc_name" {
   type        = string
   description = "Nome da VPC"
-  default = ""
+  default     = ""
 }
 
 variable "cidr_block" {

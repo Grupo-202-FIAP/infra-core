@@ -1,4 +1,4 @@
- 
+
 variable "bucket_name" {
   description = "Nome do bucket S3 para armazenar o state"
   type        = string
@@ -17,6 +17,6 @@ variable "environment" {
   default     = "dev"
 }
 
- 
+
 
  

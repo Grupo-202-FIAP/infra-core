@@ -27,6 +27,14 @@ resource "aws_security_group" "postgres" {
     security_groups = [var.lambda_sg_id]
   }
 
+  ingress {
+    description = "loopback"
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    self        = true
+  }
+
   egress {
     description = "Saida liberada"
     from_port   = 0
