@@ -114,3 +114,19 @@ variable "enable_private_dns_vpce" {
   description = "Ativar DNS privado para VPC Endpoints"
   default     = true
 }
+
+variable "bastion_instance_name" {
+  type        = string
+  description = "Nome da instância EC2 Bastion"
+}
+
+variable "bastion_instance_type" {
+  type        = string
+  description = "Tipo da instância EC2 Bastion"
+  default     = "t3.micro"
+}
+
+variable "key_pair_name" {
+  type        = string
+  description = "Nome do key pair SSH para a instância Bastion"
+}
