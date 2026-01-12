@@ -37,7 +37,7 @@ variable "sg_postgres_name" {
 variable "sg_bastion_name" {
   type        = string
   description = "Nome do Security Group do Bastion Host"
-  default     = "sg-bastion"
+  default     = "infra-sg-bastion"
 }
 
 variable "sg_lambda_name" {
