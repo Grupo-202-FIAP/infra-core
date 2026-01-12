@@ -125,5 +125,5 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
   tags = merge({ Name = "vpce-ecr-dkr" }, var.tags)
 }
 
- 
+
 
