@@ -1,7 +1,7 @@
 variable "sg_postgres_name" {
   type        = string
   description = "Nome do SG do PostgreSQL"
-  default = ""
+  default     = ""
 }
 
 variable "vpc_id" {
@@ -14,8 +14,19 @@ variable "api_sg_id" {
   description = "ID do SG da API que pode acessar o banco"
 }
 
+variable "bastion_sg_id" {
+  type        = string
+  description = "ID do SG do Bastion Host que pode acessar o banco"
+}
+
+variable "lambda_sg_id" {
+  type        = string
+  description = "ID do SG das Lambdas que podem acessar o banco"
+}
+
 variable "tags" {
   type        = map(string)
   default     = {}
   description = "Tags aplicadas ao SG"
 }
+

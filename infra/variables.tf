@@ -34,6 +34,24 @@ variable "sg_postgres_name" {
   description = "Nome do Security Group do PostgreSQL"
 }
 
+variable "sg_bastion_name" {
+  type        = string
+  description = "Nome do Security Group do Bastion Host"
+  default     = "sg-bastion"
+}
+
+variable "sg_lambda_name" {
+  type        = string
+  description = "Nome do Security Group das Lambdas"
+  default     = "infra-sg-lambda"
+}
+
+variable "allowed_ssh_cidr" {
+  type        = string
+  description = "CIDR block allowed to SSH to bastion"
+  default     = "0.0.0.0/0"
+}
+
 variable "acl_name" {
   type        = string
   description = "Nome do Network ACL"
@@ -83,5 +101,32 @@ variable "bucket_name" {
 
 variable "region" {
   description = "Região da AWS"
-  type = string
+  type        = string
+}
+
+variable "vpce_sg_name" {
+  type        = string
+  description = "Nome do Security Group para VPC Endpoints"
+}
+
+variable "enable_private_dns_vpce" {
+  type        = bool
+  description = "Ativar DNS privado para VPC Endpoints"
+  default     = true
+}
+
+variable "bastion_instance_name" {
+  type        = string
+  description = "Nome da instância EC2 Bastion"
+}
+
+variable "bastion_instance_type" {
+  type        = string
+  description = "Tipo da instância EC2 Bastion"
+  default     = "t3.micro"
+}
+
+variable "key_pair_name" {
+  type        = string
+  description = "Nome do key pair SSH para a instância Bastion"
 }
