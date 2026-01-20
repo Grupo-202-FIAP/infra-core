@@ -74,10 +74,6 @@ jobs:
       - name: Terraform Format
         run: terraform fmt -check -diff || true
         working-directory: infra
-
-      - name: Clean .terraform folder
-        run: rm -rf .terraform
-        working-directory: infra
       
       - name: Terraform Init
         run:  terraform init  
