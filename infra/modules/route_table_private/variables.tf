@@ -1,17 +1,16 @@
 variable "vpc_id" {
   type        = string
   description = "ID da VPC"
-  default     = ""
 }
 
 variable "subnet_ids" {
   type        = list(string)
-  description = "Lista de IDs das subnets"
+  description = "Lista de IDs das subnets privadas"
 }
 
-variable "gateway_id" {
+variable "nat_gateway_id" {
   type        = string
-  description = "ID do Internet Gateway"
+  description = "ID do NAT Gateway"
 }
 
 variable "route_cidr" {
@@ -27,6 +26,6 @@ variable "tags" {
 }
 
 variable "route_table_name" {
-  description = "Nome da Tabela de Rotas."
+  description = "Nome da Tabela de Rotas Privada"
   type        = string
 }

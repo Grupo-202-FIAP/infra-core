@@ -38,6 +38,15 @@ module "nat_gateway" {
   tags             = var.tags
 }
 
+module "route_table_private" {
+  source           = "./modules/route_table_private"
+  route_table_name = "private-route-table"
+  vpc_id           = module.vpc.vpc_id
+  subnet_ids       = module.private_subnet.private_subnet_ids
+  nat_gateway_id   = module.nat_gateway.nat_gateway_id
+  tags             = var.tags
+}
+
 module "route_table" {
   source           = "./modules/route_table"
   route_table_name = var.route_table_name
@@ -55,12 +64,50 @@ module "security_group_api" {
   tags        = var.tags
 }
 
+module "security_group_bastion" {
+  source           = "./modules/security_group/bastion_sg"
+  sg_bastion_name  = var.sg_bastion_name
+  vpc_id           = module.vpc.vpc_id
+  allowed_ssh_cidr = var.allowed_ssh_cidr
+  tags             = var.tags
+}
+
+module "security_group_lambda" {
+  source         = "./modules/security_group/lambda_sg"
+  sg_lambda_name = var.sg_lambda_name
+  vpc_id         = module.vpc.vpc_id
+  tags           = var.tags
+}
+
 module "security_group_postgres" {
   source           = "./modules/security_group/private_sg"
   sg_postgres_name = var.sg_postgres_name
   vpc_id           = module.vpc.vpc_id
   api_sg_id        = module.security_group_api.security_group_id
+  bastion_sg_id    = module.security_group_bastion.bastion_sg_id
+  lambda_sg_id     = module.security_group_lambda.lambda_sg_id
   tags             = var.tags
+}
+
+# 🔹 EC2 Bastion Instance
+module "ec2_bastion" {
+  source                  = "./modules/ec2_bastion"
+  bastion_instance_name   = var.bastion_instance_name
+  instance_type           = var.bastion_instance_type
+  public_subnet_id        = module.public_subnet.public_subnet_ids[0]
+  bastion_sg_id           = module.security_group_bastion.bastion_sg_id
+  key_pair_name           = var.key_pair_name
+  tags                    = var.tags
+}
+
+#🔹 DB Subnet Group para RDS
+resource "aws_db_subnet_group" "rds_subnet_group" {
+  name       = var.subnet_group_name
+  subnet_ids = module.private_subnet.private_subnet_ids
+  tags = merge(
+    { Name = var.subnet_group_name },
+    var.tags
+  )
 }
 
 # 🔹 ACL
@@ -70,4 +117,13 @@ module "acl" {
   vpc_id    = module.vpc.vpc_id
   subnet_id = module.public_subnet.public_subnet_ids[0]
   tags      = var.tags
+}
+
+module "vpc_endpoint" {
+  source             = "./modules/vpc_endpoint"
+  vpc_id             = module.vpc.vpc_id
+  vpc_cidr           = var.cidr_block
+  private_subnet_ids = module.private_subnet.private_subnet_ids
+  region             = var.region
+  tags               = var.tags
 }

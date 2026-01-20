@@ -6,7 +6,7 @@ variable "igw_name" {
 variable "vpc_id" {
   type        = string
   description = "ID da VPC"
-  default = ""
+  default     = ""
 }
 
 variable "tags" {
