@@ -8,7 +8,7 @@ variable "bucket_name" {
 variable "enable_s3" {
   description = "Habilita criação do bucket S3 (usar false para desativar deploy S3)"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "environment" {
